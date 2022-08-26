@@ -64,7 +64,7 @@ func TestConvert(t *testing.T) {
 		val       interface{}
 		targetVal interface{}
 	}{
-		{int(-5), int64(-5)},
+		{-5, int64(-5)},
 		{int8(5), int64(5)},
 		{int16(-51), int64(-51)},
 		{int32(5), int64(5)},
@@ -76,8 +76,8 @@ func TestConvert(t *testing.T) {
 		{uint64(5555), uint64(5555)},
 		{"a", "a"},
 		{true, true},
-		{float32(1.2), float64(1.2)},
-		{float64(2.2), float64(2.2)},
+		{float32(1.2), 1.2},
+		{2.2, 2.2},
 		{ia(4), "4"},
 		{[]string{"a", "b"}, "[a b]"},
 		{map[int]string{1: "a", 2: "b"}, "map[1:a 2:b]"},
@@ -198,7 +198,7 @@ func TestPointAdd(t *testing.T) {
 	p.AddField(`"string"`, `six, "seven", eight`)
 	p.AddField("stri=ng", `six=seven\, eight`)
 	p.AddField("time", time.Date(2020, time.March, 20, 10, 30, 23, 123456789, time.UTC))
-	p.AddField("duration", time.Duration(4*time.Hour+24*time.Minute+3*time.Second))
+	p.AddField("duration", 4*time.Hour+24*time.Minute+3*time.Second)
 	p.SortFields()
 
 	p.SetTime(time.Unix(60, 70))
@@ -232,7 +232,7 @@ func TestPointFluent(t *testing.T) {
 		AddField(`"string"`, `six, "seven", eight`).
 		AddField("stri=ng", `six=seven\, eight`).
 		AddField("time", time.Date(2020, time.March, 20, 10, 30, 23, 123456789, time.UTC)).
-		AddField("duration", time.Duration(4*time.Hour+24*time.Minute+3*time.Second)).
+		AddField("duration", 4*time.Hour+24*time.Minute+3*time.Second).
 		SortFields().
 		SetTime(time.Unix(60, 70))
 
